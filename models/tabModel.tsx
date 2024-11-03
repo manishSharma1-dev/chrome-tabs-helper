@@ -6,7 +6,6 @@ export interface Tab extends Document {
     keyword : string;
     description : string;
     link? : string;
-    image? : string;
     created_at? : string; 
 }
 
@@ -30,9 +29,6 @@ const TabsSchema:Schema<Tab> = new Schema(
         link : {
             type : String,
             required : true
-        },
-        image : {
-            type : String
         },
         created_at : {
             type : String

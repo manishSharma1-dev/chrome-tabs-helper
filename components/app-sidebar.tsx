@@ -2,6 +2,7 @@
 
 import {Search } from "lucide-react"
 import { BoxIcon, ServerIcon } from "lucide-react"
+import Link from "next/link"
 
 import {
   Sidebar,
@@ -14,21 +15,22 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+
 // Menu items.
 const items = [
   {
     title: "All tabs",
-    url: "#",
+    url: "http://localhost:3000/dashboard",
     icon: BoxIcon,
   },
   {
     title: "Add new ",
-    url: "#",
+    url: "http://localhost:3000/dashboard/newTab",
     icon: ServerIcon,
   },
   {
     title: "Search using keyword",
-    url: "#",
+    url: "http://localhost:3000/dashboard/searchtab",
     icon: Search,
   }
 ]
@@ -44,10 +46,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon size={14} />
                       <span className="text-xs">{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

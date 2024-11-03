@@ -2,3 +2,16 @@ how i will implement search functionality
 
 1 - find all the tab models 
 2 - find the related tabs from that tabdata 
+
+---------------------------------------------------------------
+get all tabs  -> 
+  -> get all  tabs of a logged in User
+  -> show them on the browser
+
+
+get tab detail  -> 
+  -> user se tab id -> and find the detail of the id
+
+searchtab By tags  -> 
+  -> get the tags from the user like reddit blog, dev blog, medium blog
+  -> and fing that 
