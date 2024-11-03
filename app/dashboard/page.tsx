@@ -1,3 +1,4 @@
+import { RegisterLink } from '@kinde-oss/kinde-auth-nextjs/server'
 import React from 'react'
 
 export default function page() {
@@ -24,6 +25,7 @@ export default function page() {
           <p>monday 20-20-2023</p>
         </div>
       </div>
+      <RegisterLink>register</RegisterLink>
     </div>
   )
 }

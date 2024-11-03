@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation";
+import { LoginLink, LogoutLink, RegisterLink} from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default function Home() {
 
@@ -31,7 +32,14 @@ export default function Home() {
           <div>
             <p className="py-1">Solution : </p>
             <p className="py-1">Use it 🐱‍🏍</p>
+
+           <div className="flex gap-5">
             <button className="bg-black  shadow-lg shadow-zinc-400 text-sm text-white inline pl-3 pr-3 pt-1 rounded pb-1 my-2" onClick={() => router.push("/dashboard")}>Dashboard 🐱‍🏍</button>
+            <button className="bg-black  shadow-lg shadow-zinc-400 text-sm text-white inline pl-3 pr-3 pt-1 rounded pb-1 my-2"><RegisterLink>register</RegisterLink></button>
+            <button className="bg-black  shadow-lg shadow-zinc-400 text-sm text-white inline pl-3 pr-3 pt-1 rounded pb-1 my-2"><LoginLink>login</LoginLink></button>
+            <button className="bg-black  shadow-lg shadow-zinc-400 text-sm text-white inline pl-3 pr-3 pt-1 rounded pb-1 my-2"><LogoutLink>logout</LogoutLink></button>
+           </div>
+
           </div>
         </div>
       </div>
