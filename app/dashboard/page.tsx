@@ -1,7 +1,25 @@
-import { RegisterLink } from '@kinde-oss/kinde-auth-nextjs/server'
+"use client"
 import React from 'react'
 
 export default function page() {
+
+  const handleuserdetail = async() => {
+    const response = await fetch(`http://localhost:3000/api/getallTabs`)
+
+    if(!response){
+      console.log("failed to get the response")
+    }
+
+    const data = await response.json()
+
+    if(!data){
+      console.log("data not found")
+    }
+
+    console.log("data found",data)
+  }
+
+
   return (
     <div className='mr-2 ml-12 mt-2 mb-2 w-full'>
       <h1 className='text-2xl font-sans pt-4 font-semibold'>All tabs.</h1>
@@ -25,7 +43,7 @@ export default function page() {
           <p>monday 20-20-2023</p>
         </div>
       </div>
-      <RegisterLink>register</RegisterLink>
+      <button onClick={handleuserdetail}>fetch user detail</button>
     </div>
   )
 }
