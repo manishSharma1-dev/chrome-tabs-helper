@@ -44,13 +44,22 @@ export async function POST(req : Request) {
 
         const date = new Date()
 
+        const formattedDate = date.toLocaleDateString('en-US', {
+            weekday: 'long', 
+            year: 'numeric',  
+            month: '2-digit',
+            day: '2-digit'  
+        });
+
+        // const formattedData = date.getUTCDate()
+
         const newTabData = await TabModel.create({
             userId : ID,
             title : title,
             keyword : keyword,
             description : description,
             link : link,
-            created_at : date
+            created_at : formattedDate
         })
 
         const newTabDateexitsinDB = await TabModel.findById(newTabData?._id)
@@ -65,7 +74,6 @@ export async function POST(req : Request) {
             {
                 success : true,
                 message : "new Tab Data Added to the DB",
-                newTabData
             },
             {
                 status : 201

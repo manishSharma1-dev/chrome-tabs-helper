@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Loader2 } from "lucide-react"
+import { NextResponse } from 'next/server'
 
 export default function page() {
 
@@ -26,14 +27,56 @@ export default function page() {
         keyword : "",
         description : "",
         link : "",
-        created_At : ""
         }
     })
 
-    function onSubmit(values: z.infer<typeof newTabSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof newTabSchema>) {
+      try {
+
+        setIsloading(true)
+
+          const response = await fetch('http://localhost:3000/api/addtabs',{
+            method : 'POST',
+            headers : {
+              "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(values)
+          })
+    
+          if(!response.ok){
+            return NextResponse.json(
+              {
+                success : false,
+                message : "failed to add the tab"
+              },
+              {
+                status : 400
+              }
+            )
+          }
+    
+          const data = await response.json()
+
+          setIsloading(false)
+    
+          form.reset()
+    
+          return NextResponse.json(
+            { data }
+          )
+        
+      } catch (error) {
+        return NextResponse.json(
+          {
+            success : false,
+            message : "failed to add data",
+            error : error
+          },
+          {
+            status : 500
+          }
+        )
+      }
     }
 
     return (
@@ -60,7 +103,7 @@ export default function page() {
                   </div>
                 </div>
                 <FormControl>
-                  <input placeholder="shadcn" {...field} className='border-b text-sm p-1 w-auto focus:outline-none min-w-[15rem]' />
+                  <input {...field} className='border-b text-sm p-1 w-auto focus:outline-none min-w-[15rem]' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -80,7 +123,7 @@ export default function page() {
                   </div>
                 </div>
                 <FormControl>
-                <input placeholder="shadcn" {...field} className='border-b text-sm p-1 w-auto focus:outline-none min-w-[15rem]' />
+                <input  {...field} className='border-b text-sm p-1 w-auto focus:outline-none min-w-[15rem]' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -100,7 +143,7 @@ export default function page() {
                   </div>
                 </div>
                 <FormControl>
-                <textarea placeholder="shadcn" rows={4} {...field} className='border-2 border-black rounded text-sm px-2 py-1 min-w-[30rem] focus:outline-none border-opacity-35' />
+                <textarea  rows={4} {...field} className='border-2 border-black rounded text-sm px-2 py-1 min-w-[30rem] focus:outline-none border-opacity-35' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -120,17 +163,16 @@ export default function page() {
                   </div>
                 </div>
                 <FormControl>
-                <input placeholder="shadcn" {...field} className='border-b text-sm p-1 w-auto focus:outline-none min-w-[15rem]' />
+                <input  {...field} className='border-b text-sm p-1 w-auto focus:outline-none min-w-[15rem]' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           /> 
 
-          <button type="submit" className='text-xs px-3 py-1 min-w-[5rem] bg-black text-white rounded'>
+          <button type="submit" className='text-xs pt-2 pb-2 pl-4 pr-4 bg-black text-white rounded'>
             {
-              isLoading === true ? <Loader2 size={12} className='text-white w-[5rem] animate-spin' /> : "Submit"
-              
+              isLoading === true ? <Loader2 size={12} className='text-white animate-spin' /> : "Submit"
             }
           </button>
         </form>

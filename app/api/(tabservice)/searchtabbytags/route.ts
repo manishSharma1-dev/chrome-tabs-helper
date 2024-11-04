@@ -9,9 +9,9 @@ export async function POST(req:Request){
         await ConnectDb()
     
         // note : tags and Keyword are same 
-        const { tags } = await req.json()
+        const { tag } = await req.json()
     
-        if(!tags){
+        if(!tag){
             return NextResponse.json(
                 {
                     success : false,
@@ -24,7 +24,7 @@ export async function POST(req:Request){
         }
     
         const tabData = await TabModel.find({
-            keyword : tags
+            keyword : tag
         })
     
         if(!tabData){

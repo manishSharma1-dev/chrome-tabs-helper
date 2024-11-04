@@ -20,7 +20,7 @@ export async function GET(req:Request){
 
         const ID = await user?.id
 
-        const alltabofUser = await TabModel.findOne(
+        const alltabofUser = await TabModel.find(
             {
                 userId : ID
             }

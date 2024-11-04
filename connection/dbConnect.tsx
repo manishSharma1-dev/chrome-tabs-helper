@@ -19,7 +19,7 @@ export async function ConnectDb() : Promise<void>{
 
             connection.isConnected = db.connections[0].readyState
             
-            console.log("Mongo Db Connected Successfully")
+            console.log("mongo db is already Connected")
             
         } catch (error) {
             console.error("An Error Occured While COnnecting to the Database",error)
